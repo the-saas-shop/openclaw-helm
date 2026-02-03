@@ -18,6 +18,8 @@ helm repo update
 helm install openclaw openclaw/openclaw --set credentials.anthropicApiKey=sk-ant-xxx
 ```
 
+This installs OpenClaw version **2026.1.30** by default. To use a different version, set `image.tag`.
+
 ---
 
 ## Installation
