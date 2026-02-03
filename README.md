@@ -18,7 +18,7 @@ helm repo update
 helm install openclaw openclaw/openclaw --set credentials.anthropicApiKey=sk-ant-xxx
 ```
 
-This installs OpenClaw version **2026.1.30** by default. To use a different version, set `image.tag`.
+This installs OpenClaw version **2026.2.1** by default. To use a different version, set `image.tag`.
 
 ---
 
@@ -145,10 +145,53 @@ OpenClaw is deployed as a single-instance application with the following compone
 
 ## Storage
 
-By default, the chart creates a PersistentVolumeClaim for storing OpenClaw configuration and state:
+By default, the chart creates a PersistentVolumeClaim for storing OpenClaw configuration and state at `~/.openclaw/`:
 
-- Configuration: `~/.openclaw/openclaw.json`
-- State: `~/.openclaw-a`
+```
+├── agents
+│   └── main
+│       ├── agent
+│       │   └── auth-profiles.json
+│       └── sessions
+│           ├── <session-id>.jsonl
+│           └── sessions.json
+├── canvas
+│   └── index.html
+├── credentials
+│   ├── discord-allowFrom.json
+│   └── discord-pairing.json
+├── cron
+│   ├── jobs.json
+│   └── jobs.json.bak
+├── devices
+│   ├── paired.json
+│   └── pending.json
+├── identity
+│   ├── device-auth.json
+│   └── device.json
+├── openclaw.json
+├── update-check.json
+└── workspace
+    ├── AGENTS.md
+    ├── HEARTBEAT.md
+    ├── IDENTITY.md
+    ├── memory
+    │   └── <date>.md
+    ├── SOUL.md
+    ├── TOOLS.md
+    └── USER.md
+```
+
+| Directory | Purpose |
+|-----------|---------|
+| `agents/` | Agent sessions and authentication profiles |
+| `canvas/` | Web interface customizations |
+| `credentials/` | Third-party service credentials |
+| `cron/` | Scheduled jobs |
+| `devices/` | Paired devices for remote access |
+| `identity/` | Device identity and authentication |
+| `workspace/` | Agent memory and context files |
+| `openclaw.json` | Main configuration file |
 
 <details>
 <summary><b>Disable Persistence</b></summary>
