@@ -24,6 +24,9 @@ openclaw:
   bind: "lan"
   # -- Timezone environment variable
   timezone: "UTC"
+  # -- Config file mode: "merge" keeps existing config and merges helm values (helm wins conflicts),
+  # "overwrite" replaces config entirely
+  configMode: "merge"
   # -- Skills to install from ClawHub
   skills: []
 

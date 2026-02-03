@@ -90,6 +90,22 @@ To disable persistence (data will be lost on pod restart):
 helm install openclaw . --set persistence.enabled=false
 ```
 
+## Configuration Mode
+
+OpenClaw is inherently stateful and updates its own configuration file at runtime (e.g., when installing skills or changing settings via the UI). By default, the chart uses `merge` mode to preserve these runtime changes.
+
+| Mode | Behavior |
+|------|----------|
+| `merge` (default) | Merges Helm values with existing config. Runtime changes are preserved, Helm values take precedence on conflicts. |
+| `overwrite` | Completely replaces config on every pod restart. Runtime changes are lost. |
+
+```yaml
+openclaw:
+  configMode: "merge"  # or "overwrite"
+```
+
+Use `overwrite` mode if you want strict GitOps where Helm is the single source of truth.
+
 ## Ingress
 
 To expose OpenClaw via Ingress:

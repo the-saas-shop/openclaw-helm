@@ -41,7 +41,29 @@ spec:
             - -c
             - |
               mkdir -p /home/openclaw/.openclaw
-              cp /config/openclaw.json /home/openclaw/.openclaw/openclaw.json
+              if [ "{{ .Values.openclaw.configMode }}" = "merge" ] && [ -f /home/openclaw/.openclaw/openclaw.json ]; then
+                # Merge: existing config as base, helm config overwrites
+                node -e "
+                  const fs = require('fs');
+                  const existing = JSON.parse(fs.readFileSync('/home/openclaw/.openclaw/openclaw.json', 'utf8'));
+                  const helm = JSON.parse(fs.readFileSync('/config/openclaw.json', 'utf8'));
+                  const deepMerge = (target, source) => {
+                    for (const key of Object.keys(source)) {
+                      if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+                        target[key] = target[key] || {};
+                        deepMerge(target[key], source[key]);
+                      } else {
+                        target[key] = source[key];
+                      }
+                    }
+                    return target;
+                  };
+                  const merged = deepMerge(existing, helm);
+                  fs.writeFileSync('/home/openclaw/.openclaw/openclaw.json', JSON.stringify(merged, null, 2));
+                "
+              else
+                cp /config/openclaw.json /home/openclaw/.openclaw/openclaw.json
+              fi
               chown -R 1000:1000 /home/openclaw/.openclaw
           securityContext:
             runAsUser: 0
