@@ -86,44 +86,44 @@ helm install openclaw openclaw/openclaw -f my-values.yaml
 
 ### Key Parameters
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| `image.repository` | Container image repository | `ghcr.io/openclaw/openclaw` |
-| `image.tag` | Container image tag | `2026.2.2` |
-| `openclaw.agents.defaults.model` | Primary model (provider/model format) | `anthropic/claude-sonnet-4-20250514` |
-| `openclaw.agents.defaults.timeoutSeconds` | Agent timeout in seconds | `600` |
-| `openclaw.agents.defaults.thinkingDefault` | Thinking mode (low/high/off) | `low` |
-| `openclaw.timezone` | Timezone environment variable | `UTC` |
-| `openclaw.bind` | Bind mode (lan/localhost) | `lan` |
-| `credentials.anthropicApiKey` | Anthropic API key | `""` |
-| `credentials.existingSecret` | Use existing secret | `""` |
-| `chromium.enabled` | Enable browser automation | `true` |
-| `persistence.enabled` | Enable persistent storage | `true` |
-| `ingress.enabled` | Enable ingress | `false` |
+| Parameter                                  | Description                           | Default                              |
+| ------------------------------------------ | ------------------------------------- | ------------------------------------ |
+| `image.repository`                         | Container image repository            | `ghcr.io/openclaw/openclaw`          |
+| `image.tag`                                | Container image tag                   | `2026.2.2`                           |
+| `openclaw.agents.defaults.model`           | Primary model (provider/model format) | `anthropic/claude-sonnet-4-20250514` |
+| `openclaw.agents.defaults.timeoutSeconds`  | Agent timeout in seconds              | `600`                                |
+| `openclaw.agents.defaults.thinkingDefault` | Thinking mode (low/high/off)          | `low`                                |
+| `openclaw.timezone`                        | Timezone environment variable         | `UTC`                                |
+| `openclaw.bind`                            | Bind mode (lan/localhost)             | `lan`                                |
+| `credentials.anthropicApiKey`              | Anthropic API key                     | `""`                                 |
+| `credentials.existingSecret`               | Use existing secret                   | `""`                                 |
+| `chromium.enabled`                         | Enable browser automation             | `true`                               |
+| `persistence.enabled`                      | Enable persistent storage             | `true`                               |
+| `ingress.enabled`                          | Enable ingress                        | `false`                              |
 
 <details>
 <summary><b>Full Configuration Reference</b></summary>
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| `image.repository` | Container image repository | `ghcr.io/openclaw/openclaw` |
-| `image.tag` | Container image tag | `2026.2.2` |
-| `image.pullPolicy` | Image pull policy | `IfNotPresent` |
-| `openclaw.agents.defaults.model` | Primary model (provider/model format) | `anthropic/claude-sonnet-4-20250514` |
-| `openclaw.agents.defaults.timeoutSeconds` | Agent timeout in seconds | `600` |
-| `openclaw.agents.defaults.thinkingDefault` | Thinking mode (low/high/off) | `low` |
-| `openclaw.timezone` | Timezone environment variable | `UTC` |
-| `openclaw.bind` | Bind mode (lan/localhost) | `lan` |
-| `openclaw.skills` | Skills to install from ClawHub | `[]` |
-| `openclaw.configOverrides` | Raw JSON merged into openclaw.json | `{}` |
-| `openclaw.configMode` | Config management mode (merge/overwrite) | `merge` |
-| `credentials.anthropicApiKey` | Anthropic API key | `""` |
-| `credentials.openaiApiKey` | OpenAI API key | `""` |
-| `credentials.existingSecret` | Use existing secret | `""` |
-| `chromium.enabled` | Enable browser automation | `true` |
-| `persistence.enabled` | Enable persistent storage | `true` |
-| `persistence.size` | Storage size | `5Gi` |
-| `ingress.enabled` | Enable ingress | `false` |
+| Parameter                                  | Description                              | Default                              |
+| ------------------------------------------ | ---------------------------------------- | ------------------------------------ |
+| `image.repository`                         | Container image repository               | `ghcr.io/openclaw/openclaw`          |
+| `image.tag`                                | Container image tag                      | `2026.2.2`                           |
+| `image.pullPolicy`                         | Image pull policy                        | `IfNotPresent`                       |
+| `openclaw.agents.defaults.model`           | Primary model (provider/model format)    | `anthropic/claude-sonnet-4-20250514` |
+| `openclaw.agents.defaults.timeoutSeconds`  | Agent timeout in seconds                 | `600`                                |
+| `openclaw.agents.defaults.thinkingDefault` | Thinking mode (low/high/off)             | `low`                                |
+| `openclaw.timezone`                        | Timezone environment variable            | `UTC`                                |
+| `openclaw.bind`                            | Bind mode (lan/localhost)                | `lan`                                |
+| `openclaw.skills`                          | Skills to install from ClawHub           | `[]`                                 |
+| `openclaw.configOverrides`                 | Raw JSON merged into openclaw.json       | `{}`                                 |
+| `openclaw.configMode`                      | Config management mode (merge/overwrite) | `merge`                              |
+| `credentials.anthropicApiKey`              | Anthropic API key                        | `""`                                 |
+| `credentials.openaiApiKey`                 | OpenAI API key                           | `""`                                 |
+| `credentials.existingSecret`               | Use existing secret                      | `""`                                 |
+| `chromium.enabled`                         | Enable browser automation                | `true`                               |
+| `persistence.enabled`                      | Enable persistent storage                | `true`                               |
+| `persistence.size`                         | Storage size                             | `5Gi`                                |
+| `ingress.enabled`                          | Enable ingress                           | `false`                              |
 
 See [values.yaml](charts/openclaw/values.yaml) for all available configuration options.
 
@@ -137,7 +137,7 @@ OpenClaw is deployed as a single-instance application with the following compone
 
 - **Gateway** — Main WebSocket control plane on port `18789`
 - **Canvas** — HTTP server on port `18793`
-- **Chromium Sidecar** *(optional)* — Headless browser for automation via CDP on port `9222`
+- **Chromium Sidecar** _(optional)_ — Headless browser for automation via CDP on port `9222`
 
 > **Note:** The chart uses `Recreate` deployment strategy since OpenClaw is designed as a single-instance application and cannot be scaled horizontally.
 
@@ -182,16 +182,16 @@ By default, the chart creates a PersistentVolumeClaim for storing OpenClaw confi
     └── USER.md
 ```
 
-| Directory | Purpose |
-|-----------|---------|
-| `agents/` | Agent sessions and authentication profiles |
-| `canvas/` | Web interface customizations |
-| `credentials/` | Third-party service credentials |
-| `cron/` | Scheduled jobs |
-| `devices/` | Paired devices for remote access |
-| `identity/` | Device identity and authentication |
-| `workspace/` | Agent memory and context files |
-| `openclaw.json` | Main configuration file |
+| Directory       | Purpose                                    |
+| --------------- | ------------------------------------------ |
+| `agents/`       | Agent sessions and authentication profiles |
+| `canvas/`       | Web interface customizations               |
+| `credentials/`  | Third-party service credentials            |
+| `cron/`         | Scheduled jobs                             |
+| `devices/`      | Paired devices for remote access           |
+| `identity/`     | Device identity and authentication         |
+| `workspace/`    | Agent memory and context files             |
+| `openclaw.json` | Main configuration file                    |
 
 <details>
 <summary><b>Disable Persistence</b></summary>
@@ -210,14 +210,14 @@ helm install openclaw openclaw/openclaw --set persistence.enabled=false
 
 OpenClaw is inherently stateful and updates its own configuration file at runtime (e.g., when installing skills or changing settings via the UI). By default, the chart uses `merge` mode to preserve these runtime changes.
 
-| Mode | Behavior |
-|------|----------|
-| `merge` *(default)* | Merges Helm values with existing config. Runtime changes are preserved, Helm values take precedence on conflicts. |
-| `overwrite` | Completely replaces config on every pod restart. Runtime changes are lost. |
+| Mode                | Behavior                                                                                                          |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `merge` _(default)_ | Merges Helm values with existing config. Runtime changes are preserved, Helm values take precedence on conflicts. |
+| `overwrite`         | Completely replaces config on every pod restart. Runtime changes are lost.                                        |
 
 ```yaml
 openclaw:
-  configMode: "merge"  # or "overwrite"
+  configMode: "merge" # or "overwrite"
 ```
 
 > **Tip:** Use `overwrite` mode if you want strict GitOps where Helm is the single source of truth.
@@ -277,6 +277,8 @@ kubectl port-forward svc/openclaw 18789:18789
 </details>
 
 ---
+
+More detailed post at the [blog](https://metoro.io/blog/openclaw-kubernetes)
 
 ## License
 
