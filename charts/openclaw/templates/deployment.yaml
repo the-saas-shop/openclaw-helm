@@ -69,6 +69,9 @@ spec:
               else
                 cp /config/openclaw.json /home/openclaw/.openclaw/openclaw.json
               fi
+              {{- range .Values.workspaceFiles }}
+              [ -f /tmp/workspace-files/{{ .key }} ] && cp /tmp/workspace-files/{{ .key }} /home/openclaw/.openclaw/workspace/{{ .key }}
+              {{- end }}
               chown -R 1000:1000 /home/openclaw/.openclaw
           securityContext:
             runAsUser: 0
@@ -79,6 +82,12 @@ spec:
             - name: config
               mountPath: /config
               readOnly: true
+            {{- range .Values.workspaceFiles }}
+            - name: workspace-{{ .name }}
+              mountPath: /tmp/workspace-files/{{ .key }}
+              subPath: {{ .key }}
+              readOnly: true
+            {{- end }}
         {{- if .Values.openclaw.skills }}
         - name: init-skills
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -208,6 +217,11 @@ spec:
           emptyDir:
             medium: Memory
             sizeLimit: 1Gi
+        {{- end }}
+        {{- range .Values.workspaceFiles }}
+        - name: workspace-{{ .name }}
+          configMap:
+            name: {{ .configMapName }}
         {{- end }}
         {{- with .Values.additionalVolumes }}
         {{- toYaml . | nindent 8 }}

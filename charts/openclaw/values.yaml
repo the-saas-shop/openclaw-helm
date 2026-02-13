@@ -11,7 +11,7 @@ image:
   # -- Container image repository
   repository: ghcr.io/openclaw/openclaw
   # -- Container image tag
-  tag: "2026.2.6"
+  tag: "2026.2.9"
   # -- Image pull policy
   pullPolicy: IfNotPresent
 
@@ -48,6 +48,18 @@ openclaw:
   #       telegram:
   #         enabled: true
   configOverrides: {}
+
+# -- Workspace files to mount from ConfigMaps into ~/.openclaw/workspace/
+# Each entry references an external ConfigMap and key to copy into the workspace directory.
+# Example:
+#   workspaceFiles:
+#     - name: soul
+#       configMapName: openclaw-soul
+#       key: SOUL.md
+#     - name: identity
+#       configMapName: openclaw-identity
+#       key: IDENTITY.md
+workspaceFiles: []
 
 # Credentials for LLM providers
 credentials:
