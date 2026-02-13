@@ -3,6 +3,27 @@ entries:
   openclaw:
   - apiVersion: v2
     appVersion: 2026.2.6
+    created: "2026-02-13T14:38:39.094875458Z"
+    description: A Helm chart for deploying OpenClaw - an open-source AI personal
+      assistant
+    digest: 450555a6553691cf4368840b1a3e1cedfe0a7a68ed5693a38c930ef4562dcb42
+    home: https://openclaw.ai
+    keywords:
+    - openclaw
+    - ai
+    - assistant
+    - llm
+    maintainers:
+    - name: Chris
+    name: openclaw
+    sources:
+    - https://github.com/openclaw/openclaw
+    type: application
+    urls:
+    - https://github.com/the-saas-shop/openclaw-helm/releases/download/openclaw-0.1.9/openclaw-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v2
+    appVersion: 2026.2.6
     created: "2026-02-13T13:31:50.528920093Z"
     description: A Helm chart for deploying OpenClaw - an open-source AI personal
       assistant
@@ -22,4 +43,4 @@ entries:
     urls:
     - https://github.com/the-saas-shop/openclaw-helm/releases/download/openclaw-0.1.8/openclaw-0.1.8.tgz
     version: 0.1.8
-generated: "2026-02-13T13:31:50.528930894Z"
+generated: "2026-02-13T14:38:39.094888532Z"
