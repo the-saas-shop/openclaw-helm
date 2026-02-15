@@ -72,8 +72,8 @@ spec:
               {{- range .Values.workspaceFiles }}
               [ -f /tmp/workspace-files/{{ .key }} ] && cp /tmp/workspace-files/{{ .key }} /home/openclaw/.openclaw/workspace/{{ .key }}
               {{- end }}
-              {{- if .Values.openclaw.cronJobs.configMapName }}
-              [ -f /tmp/cron-jobs/{{ .Values.openclaw.cronJobs.key }} ] && cp /tmp/cron-jobs/{{ .Values.openclaw.cronJobs.key }} /home/openclaw/.openclaw/cron/{{ .Values.openclaw.cronJobs.key }}
+              {{- if .Values.cronJobs.configMapName }}
+              [ -f /tmp/cron-jobs/{{ .Values.cronJobs.key }} ] && cp /tmp/cron-jobs/{{ .Values.cronJobs.key }} /home/openclaw/.openclaw/cron/{{ .Values.cronJobs.key }}
               {{- end }}
               chown -R 1000:1000 /home/openclaw/.openclaw
           securityContext:
@@ -91,10 +91,10 @@ spec:
               subPath: {{ .key }}
               readOnly: true
             {{- end }}
-            {{- if .Values.openclaw.cronJobs.configMapName }}
+            {{- if .Values.cronJobs.configMapName }}
             - name: cron-jobs
-              mountPath: /tmp/cron-jobs/{{ .Values.openclaw.cronJobs.key }}
-              subPath: {{ .Values.openclaw.cronJobs.key }}
+              mountPath: /tmp/cron-jobs/{{ .Values.cronJobs.key }}
+              subPath: {{ .Values.cronJobs.key }}
               readOnly: true
             {{- end }}
         {{- if .Values.openclaw.skills }}
@@ -232,10 +232,10 @@ spec:
           configMap:
             name: {{ .configMapName }}
         {{- end }}
-        {{- if .Values.openclaw.cronJobs.configMapName }}
+        {{- if .Values.cronJobs.configMapName }}
         - name: cron-jobs
           configMap:
-            name: {{ .Values.openclaw.cronJobs.configMapName }}
+            name: {{ .Values.cronJobs.configMapName }}
         {{- end }}
         {{- with .Values.additionalVolumes }}
         {{- toYaml . | nindent 8 }}
