@@ -61,6 +61,15 @@ openclaw:
 #       key: IDENTITY.md
 workspaceFiles: []
 
+# -- Skill files to mount from ConfigMaps into ~/.openclaw/workspace/skills/<name>/SKILL.md
+# Each entry references an external ConfigMap containing a skill definition.
+# Example:
+#   skillFiles:
+#     - name: gog
+#       configMapName: openclaw-skills
+#       key: gog
+skillFiles: []
+
 # Cron jobs configuration
 cronJobs:
   # -- ConfigMap name containing cron jobs definition (leave empty to disable)
