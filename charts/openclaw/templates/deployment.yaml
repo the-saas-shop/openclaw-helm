@@ -188,6 +188,10 @@ spec:
               value: /home/openclaw
             - name: TZ
               value: {{ .Values.openclaw.timezone | quote }}
+          {{- range .Values.extraEnv }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+          {{- end }}
           {{- if .Values.probes.liveness.enabled }}
           livenessProbe:
             tcpSocket:

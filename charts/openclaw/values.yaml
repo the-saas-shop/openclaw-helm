@@ -97,6 +97,15 @@ agentSkillFiles: []
 #           key: IDENTITY.md
 agentWorkspaceFiles: []
 
+# -- Extra environment variables to inject into the main OpenClaw container.
+# Each entry is a {name, value} object rendered as a plain env var (not from secrets).
+# Used for non-secret skill configuration values that OpenClaw resolves via ${VAR} syntax.
+# Example:
+#   extraEnv:
+#     - name: GOG_ACCOUNT
+#       value: "lobsterpod.agent@gmail.com"
+extraEnv: []
+
 # Cron jobs configuration
 cronJobs:
   # -- ConfigMap name containing cron jobs definition (leave empty to disable)
