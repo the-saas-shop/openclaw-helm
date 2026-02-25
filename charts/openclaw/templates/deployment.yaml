@@ -74,7 +74,7 @@ spec:
               {{- end }}
               {{- range .Values.skillFiles }}
               mkdir -p /home/openclaw/.openclaw/workspace/skills/{{ .name }}
-              [ -f /tmp/skill-files/{{ .key }} ] && cp /tmp/skill-files/{{ .key }} /home/openclaw/.openclaw/workspace/skills/{{ .name }}/SKILL.md
+              [ -f /tmp/skill-files/{{ .name }}/{{ .key }} ] && cp /tmp/skill-files/{{ .name }}/{{ .key }} /home/openclaw/.openclaw/workspace/skills/{{ .name }}/SKILL.md
               {{- end }}
               {{- if .Values.cronJobs.configMapName }}
               [ -f /tmp/cron-jobs/{{ .Values.cronJobs.key }} ] && cp /tmp/cron-jobs/{{ .Values.cronJobs.key }} /home/openclaw/.openclaw/cron/{{ .Values.cronJobs.key }}
@@ -111,7 +111,7 @@ spec:
             {{- end }}
             {{- range .Values.skillFiles }}
             - name: skill-{{ .name }}
-              mountPath: /tmp/skill-files/{{ .key }}
+              mountPath: /tmp/skill-files/{{ .name }}/{{ .key }}
               subPath: {{ .key }}
               readOnly: true
             {{- end }}
