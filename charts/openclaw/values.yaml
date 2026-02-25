@@ -30,6 +30,16 @@ openclaw:
   # -- Skills to install from ClawHub
   skills: []
 
+  # Gateway configuration
+  gateway:
+    # -- Gateway mode: "local" for single-instance
+    mode: "local"
+    # -- Control UI configuration
+    controlUi:
+      # -- Allowed origins for the control UI (required for non-loopback bindings)
+      allowedOrigins:
+        - "*"
+
   # Agent configuration (maps to agents.defaults in openclaw.json)
   agents:
     defaults:
