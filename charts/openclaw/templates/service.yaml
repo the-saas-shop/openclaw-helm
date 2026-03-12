@@ -19,5 +19,9 @@ spec:
       targetPort: canvas
       protocol: TCP
       name: canvas
+    - port: {{ .Values.service.eventsAPIPort }}
+      targetPort: eventsapi
+      protocol: TCP
+      name: eventsapi
   selector:
     {{- include "openclaw.selectorLabels" . | nindent 4 }}

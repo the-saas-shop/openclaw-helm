@@ -189,6 +189,8 @@ service:
   port: 18789
   # -- Canvas port (HTTP server)
   canvasPort: 18793
+  # -- The events sidecar API (http server)
+  eventsAPIPort: 8080
   # -- Annotations for the service
   annotations: {}
 
